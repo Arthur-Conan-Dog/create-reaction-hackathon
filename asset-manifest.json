@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/create-reaction-hackathon/static/css/main.64992c78.chunk.css",
+    "main.css": "/create-reaction-hackathon/static/css/main.a90ae1f0.chunk.css",
     "main.js": "/create-reaction-hackathon/static/js/main.03488cc1.chunk.js",
     "main.js.map": "/create-reaction-hackathon/static/js/main.03488cc1.chunk.js.map",
     "runtime-main.js": "/create-reaction-hackathon/static/js/runtime-main.52175ed9.js",
@@ -8,13 +8,13 @@
     "static/js/2.b7915c2c.chunk.js": "/create-reaction-hackathon/static/js/2.b7915c2c.chunk.js",
     "static/js/2.b7915c2c.chunk.js.map": "/create-reaction-hackathon/static/js/2.b7915c2c.chunk.js.map",
     "index.html": "/create-reaction-hackathon/index.html",
-    "static/css/main.64992c78.chunk.css.map": "/create-reaction-hackathon/static/css/main.64992c78.chunk.css.map",
+    "static/css/main.a90ae1f0.chunk.css.map": "/create-reaction-hackathon/static/css/main.a90ae1f0.chunk.css.map",
     "static/js/2.b7915c2c.chunk.js.LICENSE.txt": "/create-reaction-hackathon/static/js/2.b7915c2c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.52175ed9.js",
     "static/js/2.b7915c2c.chunk.js",
-    "static/css/main.64992c78.chunk.css",
+    "static/css/main.a90ae1f0.chunk.css",
     "static/js/main.03488cc1.chunk.js"
   ]
 }
