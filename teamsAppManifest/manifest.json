@@ -5,52 +5,47 @@
   "id": "c54b789a-ad0d-40a8-ab76-c25e82e5f745",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
-      "name": "Teams App, Inc.",
-      "websiteUrl": "https://teams.com",
-      "privacyUrl": "https://teams.com/index.html#/privacy",
-      "termsOfUseUrl": "https://teams.com/index.html#/termsofuse"
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://teams.com",
+    "privacyUrl": "https://teams.com/index.html#/privacy",
+    "termsOfUseUrl": "https://teams.com/index.html#/termsofuse"
   },
   "icons": {
-      "color": "icon-color.png",
-      "outline": "icon-outline.png"
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
   },
   "name": {
-      "short": "customReaction",
-      "full": "This field is not used"
+    "short": "customReaction",
+    "full": "This field is not used"
   },
   "description": {
-      "short": "Short description of customReaction.",
-      "full": "Full description of customReaction."
+    "short": "Short description of customReaction.",
+    "full": "Full description of customReaction."
   },
   "accentColor": "#FFFFFF",
   "bots": [],
   "composeExtensions": [
-      {
-          "botId": "0d8af884-48c6-4c3e-a4e7-2bf8d5790c90",
-          "commands": [
-              {
-                  "id": "createReaction",
-                  "context": [
-                      "message"
-                  ],
-                  "description": "Command to run action to create a reaction",
-                  "title": "Create Reaction",
-                  "type": "action",
-                  "fetchTask": false,
-                  "taskInfo": {
-                      "height": "medium",
-                      "width": "medium",
-                      "url": "https://daseong-ms.github.io/create-reaction-hackathon/?userId={userObjectId}&convId={chatId}"
-                  }
-              }
-          ]
-      }
+    {
+      "botId": "0d8af884-48c6-4c3e-a4e7-2bf8d5790c90",
+      "commands": [
+        {
+          "id": "createReaction",
+          "context": ["message"],
+          "description": "Command to run action to create a reaction",
+          "title": "Create Reaction",
+          "type": "action",
+          "fetchTask": false,
+          "taskInfo": {
+            "height": "medium",
+            "width": "medium",
+            "url": "https://daseong-ms.github.io/create-reaction-hackathon/?convId={chatId}"
+          }
+        }
+      ]
+    }
   ],
   "configurableTabs": [],
   "staticTabs": [],
-  "permissions": [
-      "identity",
-      "messageTeamMembers"
-  ],
+  "permissions": ["identity", "messageTeamMembers"],
   "validDomains": ["daseong-ms.github.io"]
 }
