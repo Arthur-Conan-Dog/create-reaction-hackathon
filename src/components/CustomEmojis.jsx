@@ -11,6 +11,7 @@ import { FixedSizeGrid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { getAllMockEmojis } from "./MockData";
 import { getCustomImages, selectCustomImage } from "./data";
+import { uploadUserImage } from "./data";
 
 const imageButtonStyles = {
   width: "calc(100% - 10px)",
@@ -18,7 +19,7 @@ const imageButtonStyles = {
   margin: "10px 5px",
 };
 
-const AddEmoji = ({ style }) => {
+const AddEmoji = ({ style, userId }) => {
   const fileInputRef = React.useRef(null);
 
   const onAddButtonClick = React.useCallback(() => {
@@ -27,9 +28,20 @@ const AddEmoji = ({ style }) => {
     }
   });
 
-  const fileUploadInputChange = React.useCallback((e) => {
+  const fileUploadInputChange = React.useCallback((event) => {
     // Todo: get upload file and update to server
     // uploaded file: e.target.value
+    // upload to server
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        const data = e.target.result;
+        const index = data.indexOf("base64,");
+        const imgData = data.substring(index + 7);
+        uploadUserImage(userId, imgData);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   });
 
   return (
@@ -55,7 +67,7 @@ const AddEmoji = ({ style }) => {
 };
 
 const EmojiRenderer = (props) => {
-  const { columnIndex, data, rowIndex, style } = props;
+  const { columnIndex, data, rowIndex, style, userId } = props;
   const index = rowIndex * data.columnCount + columnIndex;
 
   const item =
@@ -64,7 +76,7 @@ const EmojiRenderer = (props) => {
     return null;
   }
   if (item.id === "add-emoji") {
-    return <AddEmoji style={style} />;
+    return <AddEmoji style={style} userId={userId} />;
   }
 
   const onEmojiClick = (emoji) => {
@@ -130,6 +142,7 @@ export const CustomEmojisComponent = ({ messageId, userId, convId }) => {
         initialScrollTop={0}
         itemData={itemData}
         style={{ overflowX: "hidden" }}
+        userId={userId}
       >
         {EmojiRenderer}
       </FixedSizeGrid>

@@ -3,12 +3,13 @@ import {v4 as uuid} from 'uuid';
 
 export const uploadUserImage = (userId, photo) => {
   axios
-    .post("https://customemojiwebapiapi.azure-api.net/v1/CustomEmoji", {
-     emoji_id: new uuid(),
+    .post("https://www.l2b.ltd/v1/CustomEmoji", {
+     emoji_id: uuid(),
      emoji_display_name:"test",
-     emoji_autho_userId: userId,
+     emoji_author_userId: userId,
+     emoji_description:"test description",
      emoji_state:1,
-     emoji_base64_content: JSON.stringify(photo),
+     emoji_base64_content: photo,
     })
     .then((response) => {
       // check image id?
@@ -32,15 +33,15 @@ export const deleteUserImage = () => {
 
 export const getCustomImages = (userId) => {
  return axios
-    .get(`https://customemojiwebapiapi.azure-api.net/v1/CustomEmoji`,{headers:{'Access-Control-Allow-Origin' : '*'}})
+    .get(`https://www.l2b.ltd/v1/CustomEmoji`)
     .then((response) => {
       console.log(`fetch images succeed: ${response}`);
-      const images = JSON.parse(response);
+      const images =response.data;
       return images.map((image) => {
       return {
           id: image.emoji_id,
           name: image.emoji_display_name,
-          source: image.emoji_url,
+          src: image.emoji_url,
         };
       });
     })

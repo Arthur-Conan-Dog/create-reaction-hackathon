@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "@fluentui/react-northstar";
+import { Button, Flex, Card } from "@fluentui/react-northstar";
 import "./Camera.css";
 import { uploadUserImage } from "./data";
 
@@ -35,17 +35,31 @@ export const Camera = ({ userId }) => {
   };
 
   return (
-    <>
-      <video
-        onCanPlay={onVideoCanPlay}
-        ref={videoRef}
-        className={"videoContainer"}
-      ></video>
-      <Button content={"Take photo"} onClick={onCameraClick} />
-      <canvas ref={canvasRef} className={"canvasContainer"}></canvas>
-      <Button content={"Upload"} onClick={onConfirmClick} />
-      <Button content={"Cancel"} onClick={onCancelClick} />
-    </>
+    <Flex gap="gap.large" className={"shootEmojiContainer"}>
+      <Card size="large">
+        <Card.Body fitted>
+          <Flex column gap="gap.small" className={"cardContentFlex"}>
+            <video
+              onCanPlay={onVideoCanPlay}
+              ref={videoRef}
+              className={"videoContainer"}
+            ></video>
+            <Button content={"Take photo"} onClick={onCameraClick} />
+          </Flex>
+        </Card.Body>
+      </Card>
+      <Card size="large">
+        <Card.Body fitted>
+          <Flex column gap="gap.small" className={"cardContentFlex"}>
+            <canvas ref={canvasRef} className={"canvasContainer"}></canvas>
+            <Flex>
+              <Button content={"Upload"} onClick={onConfirmClick} />
+              <Button content={"Cancel"} onClick={onCancelClick} />
+            </Flex>
+          </Flex>
+        </Card.Body>
+      </Card>
+    </Flex>
   );
 };
 
@@ -71,14 +85,18 @@ export const takePicture = (canvas, video, photoRef) => {
     canvas.height = height;
     context.drawImage(video, 0, 0, width, height);
 
-    var data = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    photoRef.current = data;
+    var data = canvas.toDataURL("image/png");
+    // .replace("image/png", "image/octet-stream");
+    photoRef.current = cleanData(data);
     console.log(`take photo`);
   } else {
     clearPhoto(canvas, photo);
   }
+};
+
+const cleanData = (data) => {
+  const index = data.indexOf("base64,");
+  return data.substring(index + 7);
 };
 
 export const clearPhoto = (canvas, photo) => {
