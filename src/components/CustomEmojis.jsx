@@ -4,13 +4,11 @@ import {
   Image,
   Button,
   gridHorizontalBehavior,
-  AddIcon,
-  Text,
 } from "@fluentui/react-northstar";
+import { AddIcon } from "@fluentui/react-icons-northstar";
 import { FixedSizeGrid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { getAllMockEmojis } from "./MockData";
-import { getCustomImages, selectCustomImage } from "./data";
+import { getCustomImages } from "./data";
 import { uploadUserImage } from "./data";
 
 const imageButtonStyles = {
@@ -19,7 +17,7 @@ const imageButtonStyles = {
   margin: "10px 5px",
 };
 
-const AddEmoji = ({ style, userId }) => {
+const AddEmoji = ({ style, userId, setReload }) => {
   const fileInputRef = React.useRef(null);
 
   const onAddButtonClick = React.useCallback(() => {
@@ -29,16 +27,15 @@ const AddEmoji = ({ style, userId }) => {
   });
 
   const fileUploadInputChange = React.useCallback((event) => {
-    // Todo: get upload file and update to server
-    // uploaded file: e.target.value
-    // upload to server
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files) {
+      const file = event.target.files[0];
       let reader = new FileReader();
       reader.onload = (e) => {
         const data = e.target.result;
         const index = data.indexOf("base64,");
         const imgData = data.substring(index + 7);
-        uploadUserImage(userId, imgData);
+        const name = file.name.split(".")[0];
+        uploadUserImage(userId, imgData, name);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
@@ -58,10 +55,9 @@ const AddEmoji = ({ style, userId }) => {
         key={"add_emoji"}
         styles={imageButtonStyles}
         onClick={onAddButtonClick}
-      >
-        <AddIcon />
-        <Text weight="semibold" content="Upload Emoji" />
-      </Button>
+        icon={<AddIcon />}
+        content="Upload"
+      ></Button>
     </div>
   );
 };
@@ -78,16 +74,6 @@ const EmojiRenderer = (props) => {
   if (item.id === "add-emoji") {
     return <AddEmoji style={style} userId={userId} />;
   }
-
-  const onEmojiClick = (emoji) => {
-    selectCustomImage(
-      emoji.id,
-      data.userId,
-      data.messageId,
-      data.convId,
-      emoji.src
-    );
-  };
 
   return (
     <div style={style}>
@@ -108,11 +94,7 @@ export const CustomEmojisComponent = ({ messageId, userId, convId }) => {
   const [allEmojis, setAllEmojis] = React.useState([]);
   React.useEffect(() => {
     getCustomImages(userId).then((emojis) => {
-      if (!emojis) {
-        setAllEmojis(getAllMockEmojis());
-      } else {
-        setAllEmojis(emojis);
-      }
+      setAllEmojis(emojis);
     });
   }, []);
 

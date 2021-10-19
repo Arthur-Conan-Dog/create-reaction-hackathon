@@ -38,7 +38,7 @@
           "taskInfo": {
             "height": "medium",
             "width": "medium",
-            "url": "https://daseong-ms.github.io/create-reaction-hackathon/?convId={chatId}"
+            "url": "https://4eca-2404-f801-9000-18-f97c-99b7-6a5a-70ca.ngrok.io/?convId={chatId}"
           }
         }
       ]
@@ -47,5 +47,6 @@
   "configurableTabs": [],
   "staticTabs": [],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["daseong-ms.github.io"]
+  "devicePermissions": ["media"],
+  "validDomains": ["4eca-2404-f801-9000-18-f97c-99b7-6a5a-70ca.ngrok.io"]
 }

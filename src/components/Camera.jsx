@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Flex, Card } from "@fluentui/react-northstar";
+import { Button, Flex, Card, Input } from "@fluentui/react-northstar";
 import "./Camera.css";
 import { uploadUserImage } from "./data";
 
@@ -10,6 +10,8 @@ export const Camera = ({ userId }) => {
   const videoRef = React.useRef(null);
   const canvasRef = React.useRef(null);
   const photoRef = React.useRef(null);
+  const [name, setName] = React.useState("");
+
   React.useEffect(() => {
     if (videoRef.current) {
       init(videoRef.current);
@@ -22,16 +24,20 @@ export const Camera = ({ userId }) => {
   };
 
   const onConfirmClick = () => {
-    // upload to server
-    uploadUserImage(userId, photoRef.current);
+    uploadUserImage(userId, photoRef.current, name);
   };
 
   const onCancelClick = () => {
     clearPhoto(canvasRef.current, photoRef.current);
+    setName("");
   };
 
   const onVideoCanPlay = () => {
     console.log("can play");
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
   return (
@@ -52,9 +58,17 @@ export const Camera = ({ userId }) => {
         <Card.Body fitted>
           <Flex column gap="gap.small" className={"cardContentFlex"}>
             <canvas ref={canvasRef} className={"canvasContainer"}></canvas>
-            <Flex>
-              <Button content={"Upload"} onClick={onConfirmClick} />
-              <Button content={"Cancel"} onClick={onCancelClick} />
+            <Flex gap="gap.small">
+              <Input
+                value={name}
+                onChange={handleNameChange}
+                inverted
+                placeholder={"Give this a name!"}
+              />
+              <Flex>
+                <Button content={"Upload"} onClick={onConfirmClick} />
+                <Button content={"Clear"} onClick={onCancelClick} />
+              </Flex>
             </Flex>
           </Flex>
         </Card.Body>

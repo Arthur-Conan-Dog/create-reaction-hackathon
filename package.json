@@ -17,6 +17,7 @@
     "url": "https://github.com"
   },
   "dependencies": {
+    "@fluentui/react-icons-northstar": "^0.59.0",
     "@fluentui/react-northstar": "^0.51.0",
     "@microsoft/teams-js": "^1.6.0",
     "@microsoft/teamsfx": "^0.2.1",
@@ -42,7 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://daseong-ms.github.io/create-reaction-hackathon",
   "devDependencies": {
     "gh-pages": "^3.2.3"
   }

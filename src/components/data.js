@@ -1,15 +1,16 @@
 import axios from "axios";
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from "uuid";
 
-export const uploadUserImage = (userId, photo) => {
-  axios
+export const uploadUserImage = (userId, photo, name) => {
+  const id = uuid();
+  return axios
     .post("https://www.l2b.ltd/v1/CustomEmoji", {
-     emoji_id: uuid(),
-     emoji_display_name:"test",
-     emoji_author_userId: userId,
-     emoji_description:"test description",
-     emoji_state:1,
-     emoji_base64_content: photo,
+      emoji_id: id,
+      emoji_display_name: name ? name : "Custom",
+      emoji_author_userId: userId,
+      emoji_description: "Custom emoji",
+      emoji_state: 1,
+      emoji_base64_content: photo,
     })
     .then((response) => {
       // check image id?
@@ -32,13 +33,13 @@ export const deleteUserImage = () => {
 };
 
 export const getCustomImages = (userId) => {
- return axios
+  return axios
     .get(`https://www.l2b.ltd/v1/CustomEmoji`)
     .then((response) => {
-      console.log(`fetch images succeed: ${response}`);
-      const images =response.data;
+      console.log(`fetch images succeed`);
+      const images = response.data;
       return images.map((image) => {
-      return {
+        return {
           id: image.emoji_id,
           name: image.emoji_display_name,
           src: image.emoji_url,
