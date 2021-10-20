@@ -13,7 +13,6 @@ export const uploadUserImage = (userId, photo, name) => {
       emoji_base64_content: photo,
     })
     .then((response) => {
-      // check image id?
       console.log("upload succeed");
     })
     .catch((e) => {

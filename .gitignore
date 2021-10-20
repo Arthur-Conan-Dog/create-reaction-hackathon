@@ -1,6 +1,5 @@
 .env
-node_modules
-package-lock.json
+node_modules/
 yarn.lock
-lib
-build
+build/
+teamsAppManifest/manifest.zip

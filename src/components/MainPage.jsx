@@ -1,18 +1,27 @@
 import * as React from "react";
 import { Menu } from "@fluentui/react-northstar";
 import { Camera } from "./Camera";
-import { CustomEmojisComponent } from "./CustomEmojis";
+import { CustomEmojisComponent as CustomEmojisRenderer } from "./CustomEmojis";
 import { useLocation } from "react-router-dom";
 import "./MainPage.css";
 
+const menuItemStyles = {
+  paddingBottom: "0.75rem",
+  ":hover": {
+    paddingBottom: "0.75rem",
+  },
+};
+
 const items = [
   {
-    key: "custom_emojis",
-    content: "Custom Emojis",
+    key: "all_emojis",
+    content: "All Emojis",
+    styles: menuItemStyles,
   },
   {
     key: "shoot_emoji",
-    content: "Shoot emoji",
+    content: "Shoot One",
+    styles: menuItemStyles,
   },
 ];
 
@@ -37,7 +46,7 @@ export const MainPage = () => {
         onActiveIndexChange={onActiveIndexChange}
       />
       {activeIndex === 0 && (
-        <CustomEmojisComponent
+        <CustomEmojisRenderer
           messageId={messageId}
           userId={userId}
           convId={convId}
